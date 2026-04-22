@@ -22,4 +22,12 @@ export default defineConfig({
 
         }
     },
+    build: {
+        rollupOptions: {
+            // URLs absolutas do tipo /assets/* e /storage/* sao servidas pelo
+            // Laravel em runtime. Marcamos como external para o Rollup deixar
+            // a string como esta no bundle sem tentar resolver como modulo.
+            external: (id) => /^\/(assets|storage|bonus|pgsoft|sounds|originals|livewire|build)\//.test(id),
+        },
+    },
 });
