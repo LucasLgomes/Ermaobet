@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Editor / SO
+.editorconfig
+.idea
+.vscode
+.fleet
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Dependências que serão reinstaladas no build
+node_modules
+vendor
+
+# Arquivos de ambiente — devem vir por env vars do EasyPanel
+.env
+.env.*
+!.env.easypanel.example
+
+# Caches locais
+.phpunit.cache
+.phpunit.result.cache
+storage/logs/*.log
+storage/framework/cache/data/*
+!storage/framework/cache/data/.gitignore
+storage/framework/sessions/*
+!storage/framework/sessions/.gitignore
+storage/framework/views/*
+!storage/framework/views/.gitignore
+storage/app/public/*
+!storage/app/public/.gitignore
+
+# Uploads locais (vão via volume persistente, não via imagem)
+public/storage
+public/hot
+
+# Lixo local que não faz parte da imagem
+public/C_
+public/logs.txt
+
+# Conteúdo sensível que não deve ir para a imagem
+"SEU SQL AQUI E INSTRUÇÕES"
+dev-skills
+
+# Testes
+tests
+phpunit.xml
+
+# Documentação e metadados que não são executados
+*.md
