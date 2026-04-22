@@ -214,4 +214,40 @@ Route::post('/__bootstrap-storage', function (\Illuminate\Http\Request $request)
     ]);
 });
 
+// Rota TEMPORARIA para achatar um nivel em storage/app/public/storage/ para
+// storage/app/public/. Necessario porque o tarball inicial foi empacotado com
+// um diretorio "storage/" na raiz. REMOVER com a rota de cima.
+Route::post('/__bootstrap-flatten', function (\Illuminate\Http\Request $request) {
+    $expected = env('BOOTSTRAP_TOKEN');
+    if (empty($expected) || $request->header('X-Bootstrap-Token') !== $expected) {
+        return response()->json(['ok' => false, 'error' => 'forbidden'], 403);
+    }
+
+    $parent = storage_path('app/public');
+    $nested = $parent . '/storage';
+    if (!is_dir($nested)) {
+        return response()->json(['ok' => false, 'error' => 'nada para achatar'], 400);
+    }
+
+    $output = [];
+    $code = 0;
+    // Usa shell para mover tudo de uma vez, incluindo dotfiles
+    exec(
+        'cd ' . escapeshellarg($parent) . ' && '
+        . 'shopt -s dotglob nullglob 2>/dev/null; '
+        . 'mv storage/* . 2>&1 && '
+        . 'rmdir storage 2>&1',
+        $output,
+        $code
+    );
+    exec('chown -R www-data:www-data ' . escapeshellarg($parent) . ' 2>&1');
+
+    return response()->json([
+        'ok' => $code === 0,
+        'code' => $code,
+        'sample' => array_slice(scandir($parent) ?: [], 0, 15),
+        'output' => $output,
+    ]);
+});
+
 
