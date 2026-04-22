@@ -178,4 +178,40 @@ Route::middleware('auth:api')->get('/user/cpf', function () {
     ]);
 });
 
+// -----------------------------------------------------------------------------
+// Rota TEMPORARIA de bootstrap dos uploads iniciais. Recebe um tar.gz e extrai
+// em storage/app/public. Protegida por header X-Bootstrap-Token que bate com a
+// env BOOTSTRAP_TOKEN. Criada so para o primeiro seed; REMOVER depois do uso.
+// -----------------------------------------------------------------------------
+Route::post('/__bootstrap-storage', function (\Illuminate\Http\Request $request) {
+    $expected = env('BOOTSTRAP_TOKEN');
+    if (empty($expected) || $request->header('X-Bootstrap-Token') !== $expected) {
+        return response()->json(['ok' => false, 'error' => 'forbidden'], 403);
+    }
+    if (!$request->hasFile('archive')) {
+        return response()->json(['ok' => false, 'error' => 'archive ausente'], 400);
+    }
+
+    $target = storage_path('app/public');
+    if (!is_dir($target)) {
+        mkdir($target, 0775, true);
+    }
+
+    $uploaded = $request->file('archive');
+    $tmpPath = $uploaded->getPathname();
+
+    $output = [];
+    $code = 0;
+    exec('tar -xzf ' . escapeshellarg($tmpPath) . ' -C ' . escapeshellarg($target) . ' 2>&1', $output, $code);
+    @chmod($target, 0775);
+    exec('chown -R www-data:www-data ' . escapeshellarg($target) . ' 2>&1');
+
+    return response()->json([
+        'ok' => $code === 0,
+        'code' => $code,
+        'target' => $target,
+        'output' => array_slice($output, 0, 40),
+    ]);
+});
+
 

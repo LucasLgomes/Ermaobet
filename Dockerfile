@@ -80,10 +80,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 
 # php.ini para producao
 RUN { \
-        echo 'upload_max_filesize=20M'; \
-        echo 'post_max_size=25M'; \
-        echo 'memory_limit=512M'; \
-        echo 'max_execution_time=120'; \
+        echo 'upload_max_filesize=500M'; \
+        echo 'post_max_size=550M'; \
+        echo 'memory_limit=1024M'; \
+        echo 'max_execution_time=300'; \
         echo 'max_input_vars=5000'; \
         echo 'expose_php=Off'; \
         echo 'date.timezone=America/Sao_Paulo'; \
