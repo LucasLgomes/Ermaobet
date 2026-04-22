@@ -15,7 +15,7 @@
             <!-- Botão "Quitar" -->
             <div class="absolute top-4 left-4 z-10 flex flex-col items-center">
               <router-link to="/" class="mr-2">
-                <img src="/public/storage/quitar.png" alt="Voltar para Home" class="w-12 h-12 cursor-pointer" />
+                <img :src="'/storage/quitar.png'" alt="Voltar para Home" class="w-12 h-12 cursor-pointer" />
               </router-link>
 
              <!-- Botão de ativar/desativar tela cheia -->

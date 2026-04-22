@@ -1,12 +1,12 @@
 <template>
     <button @click.prevent="toggleModal" class="text-[28px] text-gray-500 dark:text-gray-500 mr-3 mt-1">
-    <img src="/public/storage/idioma_1.png" alt="Icon" class="w-8 h-8 mr-1"> <!-- Substitua '/caminho/para/sua/imagem-icone.png' pelo caminho real da sua imagem para o ícone -->
+    <img :src="'/storage/idioma_1.png'" alt="Icon" class="w-8 h-8 mr-1"> <!-- Substitua '/caminho/para/sua/imagem-icone.png' pelo caminho real da sua imagem para o ícone -->
 </button>
 
 
    <div id="drawer-language" class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800" tabindex="-1" >
     <h5 class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-      <img src="/public/storage/idioma_1.png" alt="Language Icon" class="w-4 h-4 mr-2.5"> <!-- Substitua '/caminho/para/sua/imagem-language.png' pelo caminho real da sua imagem para o ícone de idioma -->
+      <img :src="'/storage/idioma_1.png'" alt="Language Icon" class="w-4 h-4 mr-2.5"> <!-- Substitua '/caminho/para/sua/imagem-language.png' pelo caminho real da sua imagem para o ícone de idioma -->
       {{ $t('Select language') }}
     </h5>
         <button @click.prevent="toggleModal" type="button" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >

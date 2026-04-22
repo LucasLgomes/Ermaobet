@@ -613,7 +613,7 @@
   </div>
 
   <audio id="openSound">
-  <source src="/public/storage/som/sombauopen.mp3" type="audio/mpeg">
+  <source :src="'/storage/som/sombauopen.mp3'" type="audio/mpeg">
   Seu navegador não suporta áudio.
 </audio>
 </template>

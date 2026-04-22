@@ -1,7 +1,7 @@
 <template>
     <div class="relative inline-block text-left">
         <button id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top" class="w-8 h-8 font-medium leading-none flex items-center justify-center text-sm transition-all border-white outline-none text-violet-700">
-    <img src="/public/storage/temas_1.png" alt="Novo Botão" class="w-8 h-8"> <!-- Substitua '/caminho/para/sua/imagem-botao-nova.png' pelo caminho real da sua nova imagem para o botão -->
+    <img :src="'/storage/temas_1.png'" alt="Novo Botão" class="w-8 h-8"> <!-- Substitua '/caminho/para/sua/imagem-botao-nova.png' pelo caminho real da sua nova imagem para o botão -->
 </button>
         <!-- Dropdown menu -->
         <div id="dropdownTop" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">

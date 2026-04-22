@@ -22,12 +22,4 @@ export default defineConfig({
 
         }
     },
-    build: {
-        rollupOptions: {
-            // Assets servidos pelo Laravel em /public/storage/* e /assets/*
-            // sao URLs estaticas, nao modulos. Marcar como external para o
-            // Rollup manter a string como esta no bundle.
-            external: (id) => /^\/(public\/storage|assets|bonus|pgsoft|sounds|originals|livewire)\//.test(id),
-        },
-    },
 });
