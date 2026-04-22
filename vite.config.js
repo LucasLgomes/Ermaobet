@@ -12,8 +12,17 @@ export default defineConfig({
         vue({
             template: {
                 base: null,
-                includeAbsolute: false
-            }
+                // Com includeAbsolute=false e tags={} desligamos toda a
+                // transformacao de atributos src/href em templates Vue para
+                // imports ESM. Atributos como <img src="/assets/x.png"> e
+                // <source src="/storage/y.mp3"> ficam como URLs literais no
+                // bundle e sao resolvidas pelo Laravel em runtime, sem que o
+                // Rollup tente tratar PNG/WEBP/MP3 como modulo JavaScript.
+                transformAssetUrls: {
+                    includeAbsolute: false,
+                    tags: {},
+                },
+            },
         }),
         i18n(),
     ],
@@ -21,13 +30,5 @@ export default defineConfig({
         alias: {
 
         }
-    },
-    build: {
-        rollupOptions: {
-            // URLs absolutas do tipo /assets/* e /storage/* sao servidas pelo
-            // Laravel em runtime. Marcamos como external para o Rollup deixar
-            // a string como esta no bundle sem tentar resolver como modulo.
-            external: (id) => /^\/(assets|storage|bonus|pgsoft|sounds|originals|livewire|build)\//.test(id),
-        },
     },
 });
