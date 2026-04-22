@@ -240,7 +240,7 @@
         {!! $custom['custom_header'] !!}
     @endif
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
 
 
 

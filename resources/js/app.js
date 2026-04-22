@@ -1,4 +1,5 @@
 import "./bootstrap";
+import "../css/app.css";
 
 import { createApp, markRaw } from "vue/dist/vue.esm-bundler";
 import { createRouter, createWebHistory } from "vue-router";
