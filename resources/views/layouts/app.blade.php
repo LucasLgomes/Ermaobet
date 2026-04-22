@@ -293,7 +293,14 @@
         {!! $custom['custom_body'] !!}
     @endif
 
-    @if (!empty($custom))
+    <script>
+        // Expor como window.custom para que o bundle ESM (que roda em escopo
+        // proprio) consiga ler. `const custom = ...` nao vira global.
+        // Garantir objeto sempre presente evita erros "Cannot read properties
+        // of undefined (reading 'custom')" em componentes que acessam cedo.
+        window.custom = {!! json_encode($custom ?? []) !!};
+    </script>
+    @if (false)
         <script>
             const custom = {!! json_encode($custom) !!};
         </script>

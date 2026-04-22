@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import { sidebarStore } from "@/Stores/SideBarStore.js";
 import { useAuthStore } from "@/Stores/Auth.js";
